@@ -1,8 +1,16 @@
-def norm(vector):
-  '''
-  norm(vector) This function uses a vector as it's argument and then computes the sum of the squares of each element in the vector. Then it returns the square room of the given sum. 
-  '''
+def dot(vector01, vector02):
+  """
+  this function takes the dot product of both vectors and the dot product is multiplying both vectors together element by element and then adding them into a scalar.
+  """
+  total = 0 #for addition 
+  for i in range(len(vector01)):
+    total += vector01[i] * vector02[i] #each of the elements in the vectors are multipled and then the are added together to form a scalar.
+  return total
 
+def norm(vector):
+  """
+  norm(vector) This function uses a vector as it's argument and then computes the sum of the squares of each element in the vector. Then it returns the square room of the given sum.
+  """
   total = 0 #put before for addition purposes
   # this for loop examines if each element in the vector is a number
   for i in range(len(vector)):
@@ -11,62 +19,54 @@ def norm(vector):
   return total
 
 def normalize(vector):
-  '''
-  normalize(vector), this function takes the infinity norm and with that it normalizes a vector. Giving a normalize vector with respect to the infinity norm as a return. 
-  '''
-  new = []
+  """
+  normalize(vector), this function takes the infinity norm and with that it normalizes a vector. Giving a normalize vector with respect to the infinity norm as a return.
+  """
+  normalizer = []
   for i in range(len(vector)):
     total = 0
-    total += vector[i] * (1 / norm(vector))
-    new.append(total)
-  return new
+    total += vector[i] * (1 / norm(vector)) #the vector its divided by the two norm
+    normalizer.append(total)
+  return normalizer  
 
-def dot(vector01, vector02):
-  '''
-  this function takes the dot product of both vectors and the dot product is multiplying both vectors together element by element and then adding them into a scalar. 
-  '''
-
-  total = 0 #for addition
-  for i in range(len(vector01)):
-    total += vector01[i] * vector02[i] #each of the elements in the vectors are multipled and then the are added together to form a scalar.
-  return total
-
-def ScaVecMulti(scalar, vector):
-   '''
+def ScaVecMulti(scalar, vector01):
+  """
    This function takes a scalar and a vector as the arguments and then gives the product of the scalar and vector when they are multipled with each other. 
-   '''
-
-  new = []
-  for i in range(len(vector)):
+  """  
+  vector = []  
+  for i in range(len(vector01)):
     total = 0
-    total += vector[i] * scalar #each element of the vector is multiplied by the scalar
-    new.append(total)
-  return new
+    total += vector01[i] * scalar #each element of the vector is multiplied by the scalar
+    vector.append(total) 
+  return vector
 
 def VecSub(vector01, vector02):
-  '''
-  This function takes two vectors as the arguments and then subtracts each element of the vector in sequence and then results in a new vector 
-  '''
-
-  new = []
+  """
+  This function takes two vectors as the arguments and then subtracts each element of the vector in sequence and then results in a new vector.
+  """
+  VecSub = []  
   for i in range(len(vector01)):
-    total = 0
+    total = 0 
     total += vector01[i] - vector02[i] # takes each element separately and subtracts them from vector02 and vector01
-    new.append(total) #within the brackets they are added to form the total
-  return new
+    VecSub.append(total) 
+  return VecSub
 
-A = [[3, 2, 1], [2, -2, 1]]
 
-def GrSc(A):
-  '''
+
+A = [[3, 2, 4], [2, -2, -1]]
+
+def GramSchmidt(A):
+  """
   The modified Gram-Schmidt algorithm takes a comlumn vector within a matrix and solves for orthonormal vectors. Q and R are returned once they have been subtracted from the original matrix.
-  '''
+  """
+
   n = len(A)
   m = len(A[0])
   Q = [[0] * m for i in range(n)]
   R = [[0] * n for i in range(n)]
   v = [[0] * m for i in range(n)]
   # Q and R dimensions have to match to perform the multiplication
+
   for i in range(n):
     v[i] = A[i]
   for i in range(n):
@@ -83,6 +83,6 @@ def GrSc(A):
       #subtracting vectors
   return [Q, R]
 
-output = GrSc(A)
+output = GramSchmidt(A)
 print(output[0])
 print(output[1])
